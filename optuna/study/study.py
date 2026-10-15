@@ -1102,9 +1102,11 @@ class Study:
             repeated_params: list[bool] = []
             for param_name, param_value in params.items():
                 existing_param = trial_params[param_name]
-                if not isinstance(param_value, type(existing_param)):
+                if isinstance(param_value, bool) != isinstance(
+                    existing_param, bool
+                ) or not isinstance(param_value, type(existing_param)):
                     # Enqueued param has distribution that does not match existing param
-                    # (e.g. trying to enqueue categorical to float param).
+                    # (e.g. bool to int or categorical to float).
                     # We are not doing anything about it here, since sanitization should
                     # be handled regardless if `skip_if_exists` is `True`.
                     repeated_params.append(False)
