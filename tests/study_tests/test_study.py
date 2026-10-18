@@ -843,6 +843,10 @@ def test_enqueue_trial_skip_existing_allows_unfixed(
         ([None, None], 1),
         ([0.0, float("nan")], 2),
         ([float("nan"), 0.0], 2),
+        ([True, 1], 2),
+        ([1, True], 2),
+        ([False, 0], 2),
+        ([0, False], 2),
     ],
 )
 def test_enqueue_trial_skip_existing(
